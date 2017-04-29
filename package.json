@@ -1,0 +1,19 @@
+{
+  "name": "pos_api_system",
+  "version": "0.0.1",
+  "description": "An API powered by NodeJS and MongoDB for a POS system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edinjusupovic/POS_API.git"
+  },
+  "author": "Edin Jusupovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edinjusupovic/POS_API/issues"
+  },
+  "homepage": "https://github.com/edinjusupovic/POS_API#readme"
+}
