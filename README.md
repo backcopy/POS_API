@@ -33,8 +33,10 @@ Invoice created and added to the database succesfully
 
 One or more fields on the invoice are missing, invoice not created nor
 added to the database. 
+```
 {
   "status": {
     "message": "invoice_creation_missing-data"
   }
 }
+```
