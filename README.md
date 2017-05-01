@@ -21,6 +21,8 @@ Do 'npm install' and then run app.js from the main directory.
 
 Listed below are the API codes. 
 
+
+Invoice created and added to the database succesfully
 ```
 {
   "status": {
@@ -29,3 +31,10 @@ Listed below are the API codes.
 }
 ```
 
+One or more fields on the invoice are missing, invoice not created nor
+added to the database. 
+{
+  "status": {
+    "message": "invoice_creation_missing-data"
+  }
+}
