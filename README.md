@@ -1,6 +1,6 @@
 # Project Title
 
-A simple API built with NodeJS designed for a backend custoemr invoice system with MongoDB. 
+A simple API built with NodeJS designed for a backend customer invoice system with MongoDB. 
 
 ## Getting Started
 
