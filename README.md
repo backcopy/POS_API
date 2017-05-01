@@ -21,6 +21,19 @@ Do 'npm install' and then run app.js from the main directory.
 
 Listed below are the API codes. 
 
+Send a new invoice to be created (HTTP POST):
+```
+{
+	"name": "John Smith", 
+	"address": "742 Evergreen Terrace", 
+	"services": "foo bar",
+	"balanceTotal": "49.95"
+}
+
+```
+
+
+
 
 Invoice created and added to the database succesfully:
 ```
