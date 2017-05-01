@@ -1,4 +1,4 @@
-# Project Title
+# Point of Sales API 
 
 A simple API built with NodeJS designed for a backend customer invoice system with MongoDB. 
 
