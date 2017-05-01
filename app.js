@@ -41,7 +41,7 @@ app.use(function(err, req, res, next){
     // default value is 500 
     res.status(err.status || 500); 
     res.json({
-        error: {
+        status: {
             message: err.message
         }
     }); 
@@ -53,7 +53,7 @@ app.use(function(err, req, res, next){
 var port_for_express = 3333; 
 
 app.listen(port_for_express, function(){
-    console.log('EXPRESS SERVER STATUS: RUNNING'); 
+    console.log('WEB SERVER STATUS: RUNNING'); 
 }); 
 
 
