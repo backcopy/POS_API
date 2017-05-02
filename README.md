@@ -32,13 +32,23 @@ Send a new invoice to be created (HTTP POST):
 ```
 
 
-
+### Errors
 
 Invoice created and added to the database succesfully:
 ```
 {
   "status": {
     "message": "invoice_creation_success"
+  }
+}
+```
+
+One or more fields on the invoice are missing, invoice not created nor
+added to the database: 
+```
+{
+  "status": {
+    "message": "invoice_creation_missing-data"
   }
 }
 ```
