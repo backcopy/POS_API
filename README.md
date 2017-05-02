@@ -29,11 +29,9 @@ Send a new invoice to be created (HTTP POST):
 	"services": "foo bar",
 	"balanceTotal": "49.95"
 }
+
+
 ```
-
-
-### Errors
-
 Invoice created and added to the database succesfully:
 ```
 {
@@ -42,6 +40,8 @@ Invoice created and added to the database succesfully:
   }
 }
 ```
+
+### Errors
 
 One or more fields on the invoice are missing, invoice not created nor
 added to the database: 
