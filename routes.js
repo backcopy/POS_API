@@ -9,17 +9,25 @@ var evalmon = require('./evaluation.js');
 // create invoice
 router.post('/', function(req, res, next){
     var api_request_content = req.body; 
+    evalmon.eval_api_balanceContent(api_request_content); 
     // api json fields evaluation 
     if (evalmon.eval_api_content(api_request_content) === true){
         var err = new Error('invoice_creation_missing-data'); 
             err.status = 500; 
                 return next(err); 
     } 
-    // account balance evaluation 
-    if (evalmon.eval_api_balance(api_request_content) === true ){
-        var err = new Error('invoice_creation_balance-error'); 
+    // invoice balance evaluation (too large or too small)
+    if (evalmon.eval_api_balancePlace(api_request_content) === true){
+        var err = new Error('invoice_creation_balance-error-0'); 
             err.status = 500; 
                 return next(err); 
+    }
+    // invoice balance evaluation (contains letter)
+    if (evalmon.eval_api_balanceContent(api_request_content) === true){
+        var err = new Error('invoice_creation_balance-error-1'); 
+            err.status = 500; 
+                return next(err); 
+        
     }
         var invoice = new Invoice(req.body); 
             invoice.save(function(err, invoice){

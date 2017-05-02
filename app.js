@@ -2,7 +2,7 @@
 
 var express = require('express'); 
 var app = express(); 
-var routes = require('./routes'); 
+var routes = require('./routes.js'); 
 var jsonParser = require('body-parser').json; 
 
 // Add JSON parser module to our express middleware
