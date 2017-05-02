@@ -29,9 +29,8 @@ Send a new invoice to be created (HTTP POST):
 	"services": "foo bar",
 	"balanceTotal": "49.95"
 }
-
-
 ```
+
 Invoice created and added to the database succesfully:
 ```
 {
