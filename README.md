@@ -52,12 +52,22 @@ added to the database:
 }
 ```
 
-The balance property sent is returning an error, check to ensure it meets
-the parameters and note the invoice has not been added to the database: 
+The balance property sent is either too large or too small, ensure your
+balanceTotal property is correct: 
 ```
 {
   "status": {
-    "message": "invoice_creation_balance-error"
+    "message": "invoice_creation_balance-error-0"
+  }
+}
+```
+
+The balance property sent contains a letter, ensure your balanceTotal 
+contains only numbers with the dividing dot: 
+```
+{
+  "status": {
+    "message": "invoice_creation_balance-error-0"
   }
 }
 ```
