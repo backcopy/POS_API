@@ -52,12 +52,12 @@ added to the database:
 }
 ```
 
-One or more fields on the invoice are missing, invoice not created nor
-added to the database: 
+The balance property sent is returning an error, check to ensure it meets
+the parameters and note the invoice has not been added to the database: 
 ```
 {
   "status": {
-    "message": "invoice_creation_missing-data"
+    "message": "invoice_creation_balance-error"
   }
 }
 ```
