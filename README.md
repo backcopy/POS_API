@@ -67,7 +67,7 @@ contains only numbers with the dividing dot:
 ```
 {
   "status": {
-    "message": "invoice_creation_balance-error-0"
+    "message": "invoice_creation_balance-error-1"
   }
 }
 ```
