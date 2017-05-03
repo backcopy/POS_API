@@ -1,8 +1,8 @@
 'use strict'; 
 
+var routes = require('./routes');
 var express = require('express'); 
-var app = express(); 
-var routes = require('./routes.js'); 
+var app = express();  
 var jsonParser = require('body-parser').json; 
 
 // Add JSON parser module to our express middleware

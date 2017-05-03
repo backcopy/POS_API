@@ -57,6 +57,16 @@ if (ticker > 0){
     // true = bad
         return true; 
      }
+}, 
+
+// module: this module will convert all JSON input to uppercase before
+// inserting into the database. 
+eval_api_upperCase: function(api_request_content){
+   api_request_content.name = api_request_content.name.toUpperCase(); 
+    api_request_content.address = api_request_content.address.toUpperCase(); 
+        api_request_content.services = api_request_content.services.toUpperCase(); 
+    return api_request_content; 
 }
+    
     
 } // end of export. 
