@@ -10,6 +10,14 @@ var InvoiceSchema = new Schema({
     balanceTotal: {type: String}
 }); 
 
+// API KEY SCHEMA 
+var ApiKeySchema = new Schema({
+    key: {type: String}
+}); 
+
+
 var Invoice = mongoose.model("Invoice", InvoiceSchema); 
+var Keys = mongoose.model("Keys", ApiKeySchema); 
 
 module.exports.Invoice = Invoice; 
+module.exports.Keys = Keys; 

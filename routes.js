@@ -3,32 +3,46 @@
 var express = require('express'); 
 var router = express.Router(); 
 var Invoice = require('./schema').Invoice; 
+var Keys = require('./schema').Keys; 
 var evalmon = require('./evaluation.js'); 
 
-// temporary keys
-var keys_db = ['9T5ROmeTU5UgXAXySKRE','4AeVU38iX07g6UiWiAwG', 'mxDovxzmuX78732THjRB']; 
+// master key, predefined and should be very long. 
+var keys_db = ['secret']; 
 
-// API key system 
-
-router.post('/key/:key', function(req, res, next){
+// API key generation system 
+    // This will create an API key using a secret pre-defined
+    // key and store it in the database under "keys" collection
+        // must include the '/create/:key-here' extension. 
+router.post('/key/create/:key', function(req, res, next){
     if (req.params.key !== keys_db[0]){
         var err = new Error('invoice_creation_invalid-key'); 
             err.status = 500; 
              return next(err);
     }
+    var key = new Keys(req.body); 
+            key.save(function(err, key){
+                if (err) return next(err); 
+                    res.status(201); 
     res.json({
         status: "success",
-        key: req.params.key
+        key_created: req.body.key
+        }); 
     }); 
-})
+}); 
+
+// API query system 
+    // This will allow a person to query using the /query/ extension
+router.post("/query/", function(req, res, next){
+   res.json({
+       status: "success", 
+       requested_data: req.body.request
+   }) 
+}); 
 
 
 // create invoice
 router.post('/', function(req, res, next){
     var api_request_content = req.body; 
-    
-    
-    
     
     evalmon.eval_api_balanceContent(api_request_content); 
     // api json fields evaluation 
@@ -48,7 +62,6 @@ router.post('/', function(req, res, next){
         var err = new Error('invoice_creation_balance-error-1'); 
             err.status = 500; 
                 return next(err); 
-        
     }
     // uppercase functionality 
     req.body = evalmon.eval_api_upperCase(api_request_content); 
