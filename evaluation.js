@@ -2,8 +2,40 @@
 
 // All evaluation modules will be included in this file. 
 
+function api_content(api_request_content){
+   // console.log(api_request_content.name); 
+    if (
+        !api_request_content.name ||
+        !api_request_content.address || 
+        !api_request_content.services ||
+        !api_request_content.balanceTotal ||
+            api_request_content.name.length < 3 ||
+            api_request_content.address.length < 3 ||
+            api_request_content.services.length < 3 ||
+            api_request_content.balanceTotal.length < 3){
+            // return true if evaluation deems that the POST data
+            // did not contain all the appropritae designated data. 
+            // true = bad 
+    //   console.log('API JSON IS OK')
+        return true;   
+    }
+}; 
+
 
 module.exports = {   
+    
+
+core: function(api_request_content){
+    // 1st checker function 
+    if (api_content(api_request_content) === true){
+        return {
+            "status": "fail", 
+            "error": 'invoice_creation_missing-data'
+        }; 
+    }
+    
+    
+}, 
     
 // module: evaluation for testing whether the POST
 // data JSON objects are properly filled. 

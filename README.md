@@ -2,6 +2,8 @@
 
 A simple API built with NodeJS designed for a backend customer invoice system with MongoDB. 
 
+WARNING: THIS CODE IS ACTIVELY BEING DEVELOPED AND IS NOT PRODUCTION READY. 
+
 ## Getting Started
 
 ### Prerequisites

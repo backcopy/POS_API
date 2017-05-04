@@ -7,6 +7,8 @@ var Keys = require('./schema').Keys;
 var evalmon = require('./evaluation.js'); 
 
 // master key, predefined and should be very long. 
+    // WARNING: DO NOT USE THIS IN PRODUCTION, IT IS 
+    // NOT SECURE. 
 var keys_db = ['secret']; 
 
 // API key generation system 
@@ -41,8 +43,12 @@ router.post("/query/", function(req, res, next){
 
 
 // create invoice
-router.post('/', function(req, res, next){
+router.post('/', function(req, res, next){ 
     var api_request_content = req.body; 
+    
+        var foobaro = evalmon.core(api_request_content);
+            console.log(foobaro.error); 
+    
     
     evalmon.eval_api_balanceContent(api_request_content); 
     // api json fields evaluation 
