@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router(); 
 var Invoice = require('./schema').Invoice; 
 var Keys = require('./schema').Keys; 
-var evalmon = require('./evaluation.js'); 
+var evalmon = require('./evalmon/evaluation.js'); 
 
 // master key, predefined and should be very long. 
     // WARNING: DO NOT USE THIS IN PRODUCTION, IT IS 
@@ -45,18 +45,18 @@ router.post("/query/", function(req, res, next){
 // create invoice
 router.post('/', function(req, res, next){ 
     var api_request_content = req.body; 
+
     
-        var foobaro = evalmon.core(api_request_content);
-            console.log(foobaro.error); 
+    evalmon.core(api_request_content); 
     
     
     evalmon.eval_api_balanceContent(api_request_content); 
     // api json fields evaluation 
-    if (evalmon.eval_api_content(api_request_content) === true){
-        var err = new Error('invoice_creation_missing-data'); 
-            err.status = 500; 
-                return next(err); 
-    } 
+//    if (evalmon.eval_api_content(api_request_content) === true){
+//        var err = new Error('invoice_creation_missing-data'); 
+//            err.status = 500; 
+//                return next(err); 
+//    } 
     // invoice balance evaluation (too large or too small)
     if (evalmon.eval_api_balancePlace(api_request_content) === true){
         var err = new Error('invoice_creation_balance-error-0'); 
