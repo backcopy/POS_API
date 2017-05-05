@@ -34,10 +34,10 @@ router.post('/key/create/:key', function(req, res, next){
 
 // API query system 
     // This will allow a person to query using the /query/ extension
-router.post("/query/", function(req, res, next){
+router.post("/query/:key/", function(req, res, next){
    res.json({
        status: "success", 
-       requested_data: req.body.request
+       requested_data: req.params.key
    }) 
 }); 
 
@@ -47,22 +47,16 @@ router.post('/', function(req, res, next){
     var api_request_content = req.body; 
 
     
-    evalmon.core(api_request_content); 
-    
+    var system_api_status = evalmon.core(api_request_content); 
     
     evalmon.eval_api_balanceContent(api_request_content); 
-    // api json fields evaluation 
-//    if (evalmon.eval_api_content(api_request_content) === true){
-//        var err = new Error('invoice_creation_missing-data'); 
+    
+    // invoice balance evaluation (too large or too small)
+//    if (evalmon.eval_api_balancePlace(api_request_content) === true){
+//        var err = new Error('invoice_creation_balance-error-0'); 
 //            err.status = 500; 
 //                return next(err); 
-//    } 
-    // invoice balance evaluation (too large or too small)
-    if (evalmon.eval_api_balancePlace(api_request_content) === true){
-        var err = new Error('invoice_creation_balance-error-0'); 
-            err.status = 500; 
-                return next(err); 
-    }
+//    }
     // invoice balance evaluation (contains letter)
     if (evalmon.eval_api_balanceContent(api_request_content) === true){
         var err = new Error('invoice_creation_balance-error-1'); 
@@ -78,7 +72,7 @@ router.post('/', function(req, res, next){
                 if (err) return next(err); 
                     res.status(201); 
             res.json({
-        status: "invoice_creation_success"
+        status: system_api_status
         }); 
     })
 }); 

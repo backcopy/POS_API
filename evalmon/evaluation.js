@@ -3,16 +3,17 @@
 // All evaluation modules will be included in this file. 
 
 function api_core(api_request_content){
+    var balanceTotal = api_request_content.balanceTotal; 
     // evaluation function (1) 
     if (
+        // parameters here
         !api_request_content.name ||
         !api_request_content.address || 
         !api_request_content.services ||
         !api_request_content.balanceTotal ||
             api_request_content.name.length < 3 ||
             api_request_content.address.length < 3 ||
-            api_request_content.services.length < 3 ||
-            api_request_content.balanceTotal.length < 3){
+            api_request_content.services.length < 3){
         // return data based on above evaluation 
         return {
             "status": "fail", 
@@ -20,14 +21,12 @@ function api_core(api_request_content){
     }    
         // evaluation function (2)
 } else if (
-    // parameters here lol 
-    api_request_content.name === api_request_content.name
-
-)
-
+    // parameters here
+    balanceTotal.length < 4 || balanceTotal.length > 7)
+    
     return {
             "status": "fail", 
-                "message": "THIS IS A TEST"
+                "message": "invoice_creation_balance-error-0"
     } 
            
            
@@ -51,43 +50,16 @@ module.exports = {
 
 core: function(api_request_content){
         if (api_core(api_request_content).status === 'fail'){
-            console.log(api_core(api_request_content).message);  
+            return api_core(api_request_content).message;  
             
         } else if (api_core(api_request_content).status === 'success') {
-            console.log(api_core(api_request_content).message);  
+            return api_core(api_request_content).message;  
             
         } else if (api_core(api_request_content).status === 'critical'){
-            console.log(api_core(api_request_content).message);         
+            return api_core(api_request_content).message;         
     }
 }, 
-    
-// module: evaluation for testing whether the POST
-// data JSON objects are properly filled. 
-//eval_api_content: function (api_request_content){
-//    if (
-//        !api_request_content.name ||
-//        !api_request_content.address || 
-//        !api_request_content.services ||
-//        !api_request_content.balanceTotal ||
-//            api_request_content.name.length < 3 ||
-//            api_request_content.address.length < 3 ||
-//            api_request_content.services.length < 3 ||
-//            api_request_content.balanceTotal.length < 3){
-//            // return true if evaluation deems that the POST data
-//            // did not contain all the appropritae designated data. 
-//            // true = bad 
-//        return true;   
-//        }
-//    } 
-    
-// module: evaluation to test whether returned balanceTotal
-// meets the parameters. 
-    // note: '$' dollarsign has been stripped and will not store. 
-        // <== VALID ==> 
-            // 0.00
-            // 00.00
-            // 000.00
-            // 0000.00 
+ 
 eval_api_balancePlace: function (api_request_content){ 
         var balanceTotal = api_request_content.balanceTotal; 
         if(balanceTotal.length < 4 || balanceTotal.length > 7){
