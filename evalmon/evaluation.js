@@ -94,8 +94,6 @@ var balanceContentResult = balanceContent(api_request_content);
 
 
 module.exports = {   
-    
-
 core: function(api_request_content){
         if (api_core(api_request_content).status === 'fail'){
             return api_core(api_request_content);  

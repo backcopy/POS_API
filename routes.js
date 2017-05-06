@@ -34,14 +34,6 @@ router.post('/key/create/:key', function(req, res, next){
 
 // API query system 
     // This will allow a person to query using the /query/:key/ extension
-
-    // Query system schematics 
-        // /query/:key/ 
-            // SEND A POST OBJECT; 
-            // {
-            // "name": NAME GOES HERE     
-            // } 
-
 router.post("/query/:key/", function(req, res, next){
    res.json({
        status: "success", 
@@ -65,7 +57,7 @@ router.post('/', function(req, res, next){
         }
     
     // uppercase functionality 
-        //req.body = evalmon.eval_api_upperCase(api_request_content); 
+        req.body = evalmon.eval_api_upperCase(api_request_content); 
     
     
     
