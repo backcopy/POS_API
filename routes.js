@@ -45,7 +45,8 @@ router.post('/key/create/:key', function(req, res, next){
 router.post("/query/:key/", function(req, res, next){
    res.json({
        status: "success", 
-       requested_data: req.params.key
+       key_data: req.params.key,
+       request_data: req.body
    }) 
 }); 
 
