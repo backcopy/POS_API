@@ -41,9 +41,8 @@ app.use(function(err, req, res, next){
     // default value is 500 
     res.status(err.status || 500); 
     res.json({
-        status: {
-            message: err.message
-        }
+        status: 'fail', 
+        message: err.message
     }); 
 }); 
 

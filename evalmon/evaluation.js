@@ -98,7 +98,7 @@ module.exports = {
 
 core: function(api_request_content){
         if (api_core(api_request_content).status === 'fail'){
-            return api_core(api_request_content).message;  
+            return api_core(api_request_content);  
             
         } else if (api_core(api_request_content).status === 'success') {
             return api_core(api_request_content).message;  

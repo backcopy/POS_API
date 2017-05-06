@@ -57,19 +57,30 @@ router.post('/', function(req, res, next){
 
     
     var system_api_status = evalmon.core(api_request_content); 
+        if (system_api_status.status === 'fail'){
+           var err = new Error(system_api_status);
+                err.status = 404;
+                    err.message = system_api_status.message; 
+                        next(err);
+        }
     
     // uppercase functionality 
-    req.body = evalmon.eval_api_upperCase(api_request_content); 
+        //req.body = evalmon.eval_api_upperCase(api_request_content); 
+    
+    
     
     // prepare invoice for database insertion 
+    if (system_api_status.status !== 'fail'){
         var invoice = new Invoice(req.body); 
-            invoice.save(function(err, invoice){
+            invoice.save(function(err, invoice){ 
                 if (err) return next(err); 
                     res.status(201); 
             res.json({
-        status: system_api_status
+        status: "success",
+            message: "invoice_creation_success"
         }); 
-    })
+    })  
+    }   
 }); 
 
 
