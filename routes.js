@@ -33,7 +33,15 @@ router.post('/key/create/:key', function(req, res, next){
 }); 
 
 // API query system 
-    // This will allow a person to query using the /query/ extension
+    // This will allow a person to query using the /query/:key/ extension
+
+    // Query system schematics 
+        // /query/:key/ 
+            // SEND A POST OBJECT; 
+            // {
+            // "name": NAME GOES HERE     
+            // } 
+
 router.post("/query/:key/", function(req, res, next){
    res.json({
        status: "success", 
@@ -49,20 +57,6 @@ router.post('/', function(req, res, next){
     
     var system_api_status = evalmon.core(api_request_content); 
     
-    evalmon.eval_api_balanceContent(api_request_content); 
-    
-    // invoice balance evaluation (too large or too small)
-//    if (evalmon.eval_api_balancePlace(api_request_content) === true){
-//        var err = new Error('invoice_creation_balance-error-0'); 
-//            err.status = 500; 
-//                return next(err); 
-//    }
-    // invoice balance evaluation (contains letter)
-    if (evalmon.eval_api_balanceContent(api_request_content) === true){
-        var err = new Error('invoice_creation_balance-error-1'); 
-            err.status = 500; 
-                return next(err); 
-    }
     // uppercase functionality 
     req.body = evalmon.eval_api_upperCase(api_request_content); 
     

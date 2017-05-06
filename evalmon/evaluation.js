@@ -4,6 +4,43 @@
 
 function api_core(api_request_content){
     var balanceTotal = api_request_content.balanceTotal; 
+  //  var balanceContentTicker = 0; 
+    
+// balanceContent function 
+function balanceContent(api_request_content){
+    let balanceContentTicker = 0; 
+    
+    // loop to test if the balance contains a letter 
+    for (let i=0;i<api_request_content.balanceTotal.length;i++){ 
+        let h = '' + api_request_content.balanceTotal[i];
+        // test tables, numbers 0 - 9 and the dot
+        if(h !== '0' && h !== '1' && h !== '2' && 
+          h !== '3' && h !== '4' && h !== '5' && 
+          h !== '6' && h !== '7' && h !== '8' && 
+          h !== '9' && h !== '.'){
+            balanceContentTicker++  
+        }  
+    } 
+if (balanceContentTicker > 0){
+    // true = bad
+        return {
+                "status": "fail", 
+                    "message": "invoice_creation_missing-data"
+        
+        } 
+}
+    return {
+                "status": "success", 
+                    "message": "ignore-this-data"
+    }
+}
+    
+let balanceContentResultData = balanceContent(api_request_content); 
+   
+    
+// Execute balanceContent function and store result in a new variable. 
+var balanceContentResult = balanceContent(api_request_content); 
+    
     // evaluation function (1) 
     if (
         // parameters here
@@ -19,16 +56,27 @@ function api_core(api_request_content){
             "status": "fail", 
                 "message": "invoice_creation_missing-data"
     }    
+        
         // evaluation function (2)
 } else if (
     // parameters here
-    balanceTotal.length < 4 || balanceTotal.length > 7)
-    
-    return {
+    balanceTotal.length < 4 || balanceTotal.length > 7){
+            return {
             "status": "fail", 
                 "message": "invoice_creation_balance-error-0"
     } 
-           
+    
+     // evaluation function (3)
+} else if (
+    // parameters here
+    balanceContentResultData.status === 'fail'){
+            return {
+            "status": "fail", 
+                "message": "invoice_creation_balance-error-1"
+    } 
+}
+    
+    
            
     // return success if all above DONT fail (i.e, they will
     // return their own object if they fail)
@@ -37,7 +85,7 @@ function api_core(api_request_content){
                 "message": "invoice_creation_success"
     }
     // return a critical error message if the system cannot find a
-    // status of 'success' or 'fail' 
+    // status of 'success' or 'fail' - this is a last resort error. 
         return {
             "status": "critical", 
             "message": "invoice_creation-critical-error"
@@ -59,33 +107,7 @@ core: function(api_request_content){
             return api_core(api_request_content).message;         
     }
 }, 
- 
-eval_api_balancePlace: function (api_request_content){ 
-        var balanceTotal = api_request_content.balanceTotal; 
-        if(balanceTotal.length < 4 || balanceTotal.length > 7){
-            return true;  
-        }
-    },
-    
-eval_api_balanceContent: function(api_request_content){
-    let ticker = 0; 
-    
-    // loop to test if the balance contains a letter 
-    for (let i=0;i<api_request_content.balanceTotal.length;i++){ 
-        let h = '' + api_request_content.balanceTotal[i];
-        // test tables, numbers 0 - 9 and the dot
-        if(h !== '0' && h !== '1' && h !== '2' && 
-          h !== '3' && h !== '4' && h !== '5' && 
-          h !== '6' && h !== '7' && h !== '8' && 
-          h !== '9' && h !== '.'){
-            ticker++  
-        }  
-    } 
-if (ticker > 0){
-    // true = bad
-        return true; 
-     }
-}, 
+     
 
 // module: this module will convert all JSON input to uppercase before
 // inserting into the database. 
